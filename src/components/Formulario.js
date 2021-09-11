@@ -1,6 +1,25 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 const Formulario = () => {
+	// Crear State de citas
+	const [cita, actualizarCita] = useState({
+		mascota: '',
+		propietario: '',
+		fecha: '',
+		sintomas: '',
+	});
+
+	// Función que se ejecuta cada que el usuario escribe en un input
+	const actualizarState = (event) => {
+		actualizarCita({
+			...cita, // copia el valor de cita completo
+			[event.target.name]: event.target.value,
+		});
+	};
+
+	// Extraer los valores
+	const { mascota, propietario, fecha, hora, sintomas } = cita;
+
 	return (
 		<Fragment>
 			<h2>Crear Cita</h2>
@@ -12,25 +31,41 @@ const Formulario = () => {
 					name="mascota"
 					className="u-full-width"
 					placeholder="Nombre mascota"
+					onChange={actualizarState}
+					value={mascota}
 				/>
-
 				<label>Nombre Dueño</label>
 				<input
 					type="text"
 					name="propietario"
 					className="u-full-width"
 					placeholder="Nombre dueño mascota"
+					onChange={actualizarState}
+					value={propietario}
 				/>
-
 				<label>Fecha</label>
-				<input type="date" name="fecha" className="u-full-width" />
-
+				<input
+					type="date"
+					name="fecha"
+					className="u-full-width"
+					onChange={actualizarState}
+					value={fecha}
+				/>
 				<label>Hora</label>
-				<input type="time" name="hora" className="u-full-width" />
-
+				<input
+					type="time"
+					name="hora"
+					className="u-full-width"
+					onChange={actualizarState}
+					value={hora}
+				/>
 				<label>Síntomas</label>
-				<textarea className="u-full-width" name="sintomas"></textarea>
-
+				<textarea
+					className="u-full-width"
+					name="sintomas"
+					onChange={actualizarState}
+					value={sintomas}
+				></textarea>
 				<button type="submit" className="u-full-width button-primary">
 					Agregar Cita
 				</button>
